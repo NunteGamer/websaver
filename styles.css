@@ -1,0 +1,84 @@
+/* Estilos generales */
+body {
+    font-family: 'Comfortaa', sans-serif; /* Cambiar la fuente */
+    background-color: #121212; /* Fondo oscuro */
+    color: #e0e0e0; /* Texto claro */
+    margin: 0;
+}
+
+header {
+    background-color: #1f1f1f; /* Fondo del encabezado */
+    padding: 20px;
+    text-align: center;
+    color: #e0e0e0;
+    font-weight: 700; /* Títulos más gruesos */
+}
+
+#search-bar {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #444; /* Borde oscuro */
+    background-color: #2c2c2c; /* Fondo de la barra de búsqueda */
+    color: #e0e0e0; /* Texto de la barra de búsqueda */
+}
+
+/* Contenedor de resultados */
+#results {
+    padding: 20px;
+}
+
+/* Estilos de cada resultado */
+.result-item {
+    background-color: #1e1e1e; /* Fondo de cada elemento */
+    border: 1px solid #444; /* Borde oscuro */
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.result-item h3 {
+    margin: 0;
+    font-weight: 700; /* Títulos más gruesos */
+}
+
+.result-item a {
+    text-decoration: none;
+    color: #81a1c1; /* Color del enlace */
+}
+
+.result-item p {
+    margin: 5px 0;
+}
+
+/* Estilos de categoría */
+.category {
+    font-size: 1.5em;
+    font-weight: 700; /* Categorías más gruesas */
+    color: #88c0d0; /* Color para categorías */
+    margin: 15px 0 10px;
+    padding: 5px;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(10px); }
+}
+
+.result-item.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.result-item.fade-out {
+    animation: fadeOut 0.3s ease forwards;
+}
