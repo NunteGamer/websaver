@@ -82,3 +82,11 @@ header {
 .result-item.fade-out {
     animation: fadeOut 0.3s ease forwards;
 }
+
+.no-results-message {
+    color: #aaa;
+    font-size: 1.2em;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
