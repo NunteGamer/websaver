@@ -17,4 +17,4 @@ minecraft.generator.commands.mobs.vanilla
 Estas sirven para poder encontrar cosas si no sabes el nombre exacto. Si quieres encontrar una web que generaba comandos de mobs para Minecraft, puedes buscar por _"mobs"_ y aún así podrás encontrarlo.
 
 > [!NOTE]  
-> Los tags **están ocultos ante el usuario** No pueden ser vistos sin entrar al _.csv_.
+> Los tags **están ocultos ante el usuario**. No pueden ser vistos sin entrar al _.csv_.
