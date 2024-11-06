@@ -18,18 +18,32 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             function displayResults(filteredItems) {
-                resultsContainer.innerHTML = "";
+                resultsContainer.innerHTML = ""; // Limpiamos los resultados anteriores
                 let currentCategory = null;
-                
+                let currentCategoryContainer = null;
+
+                if (filteredItems.length === 0) {
+                    const noResultsMessage = document.createElement("div");
+                    noResultsMessage.className = "no-results-message";
+                    noResultsMessage.textContent = "Parece que no hay nada por aquí.";
+                    resultsContainer.appendChild(noResultsMessage);
+                    return; // Salimos de la función si no hay resultados
+                }
+
+                let hasVisibleResults = false;
+
                 filteredItems.forEach(item => {
                     const itemElement = document.createElement("div");
 
                     if (item.category) {
                         // Si es una categoría, la mostramos
+                        currentCategoryContainer = document.createElement("div");
+                        currentCategoryContainer.className = "category-container";
                         const categoryElement = document.createElement("div");
                         categoryElement.className = "category";
                         categoryElement.textContent = item.category;
-                        resultsContainer.appendChild(categoryElement);
+                        currentCategoryContainer.appendChild(categoryElement);
+                        resultsContainer.appendChild(currentCategoryContainer);
                         currentCategory = categoryElement;
                     } else {
                         // Si no es una categoría, creamos el item de enlace
@@ -39,26 +53,36 @@ document.addEventListener("DOMContentLoaded", function () {
                             <p>${item.description}</p>
                         `;
                         // Si ya hay una categoría actual, la asignamos a este item
-                        if (currentCategory) {
-                            currentCategory.appendChild(itemElement);
+                        if (currentCategoryContainer) {
+                            currentCategoryContainer.appendChild(itemElement);
                         } else {
                             resultsContainer.appendChild(itemElement);
                         }
+
+                        hasVisibleResults = true;
                     }
                 });
 
                 // Filtra las categorías vacías
-                const categories = document.querySelectorAll(".category");
-                categories.forEach(category => {
-                    const categoryItems = category.nextElementSibling.querySelectorAll(".result-item");
+                const categories = document.querySelectorAll(".category-container");
+                categories.forEach(categoryContainer => {
+                    const categoryItems = categoryContainer.querySelectorAll(".result-item");
                     const hasVisibleItems = Array.from(categoryItems).some(item => item.style.display !== "none");
                     
                     if (hasVisibleItems) {
-                        category.style.display = "block"; // Muestra la categoría si tiene elementos visibles
+                        categoryContainer.style.display = "block"; // Muestra la categoría si tiene elementos visibles
                     } else {
-                        category.style.display = "none"; // Oculta la categoría si no tiene elementos
+                        categoryContainer.style.display = "none"; // Oculta la categoría si no tiene elementos
                     }
                 });
+
+                // Si no hay resultados visibles, mostramos el mensaje de "no hay resultados"
+                if (!hasVisibleResults) {
+                    const noResultsMessage = document.createElement("div");
+                    noResultsMessage.className = "no-results-message";
+                    noResultsMessage.textContent = "Parece que no hay nada por aquí.";
+                    resultsContainer.appendChild(noResultsMessage);
+                }
             }
 
             // Mostrar todos los resultados inicialmente
