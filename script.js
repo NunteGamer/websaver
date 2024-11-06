@@ -19,22 +19,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
             function displayResults(filteredItems) {
                 resultsContainer.innerHTML = "";
+                let currentCategory = null;
+                
                 filteredItems.forEach(item => {
                     const itemElement = document.createElement("div");
-                    
+
                     if (item.category) {
-                        // Crear elemento de categoría
-                        itemElement.className = "category";
-                        itemElement.textContent = item.category;
+                        // Si es una categoría, la mostramos
+                        const categoryElement = document.createElement("div");
+                        categoryElement.className = "category";
+                        categoryElement.textContent = item.category;
+                        resultsContainer.appendChild(categoryElement);
+                        currentCategory = categoryElement;
                     } else {
-                        // Crear elemento de enlace normal
+                        // Si no es una categoría, creamos el item de enlace
                         itemElement.className = "result-item fade-in";
                         itemElement.innerHTML = `
                             <h3><a href="${item.url}" target="_blank">${item.name}</a></h3>
                             <p>${item.description}</p>
                         `;
+                        // Si ya hay una categoría actual, la asignamos a este item
+                        if (currentCategory) {
+                            currentCategory.appendChild(itemElement);
+                        } else {
+                            resultsContainer.appendChild(itemElement);
+                        }
                     }
-                    resultsContainer.appendChild(itemElement);
+                });
+
+                // Filtra las categorías vacías
+                const categories = document.querySelectorAll(".category");
+                categories.forEach(category => {
+                    const categoryItems = category.nextElementSibling.querySelectorAll(".result-item");
+                    const hasVisibleItems = Array.from(categoryItems).some(item => item.style.display !== "none");
+                    
+                    if (hasVisibleItems) {
+                        category.style.display = "block"; // Muestra la categoría si tiene elementos visibles
+                    } else {
+                        category.style.display = "none"; // Oculta la categoría si no tiene elementos
+                    }
                 });
             }
 
